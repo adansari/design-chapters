@@ -1,0 +1,26 @@
+﻿@startuml
+
+interface IFileWatcher [ 
+<<IFileWatcher>>
+provided interface 
+]
+
+package "File Watcher Component" {
+IFileWatcher - [FileWatcher]
+IFileSysRepo - [FileSysRepo]
+}
+
+package "System"{
+package "Threading"{
+[PeriodicTimer] as PT 
+}
+
+package "IO"{
+[File] as F
+}
+}
+
+[FileWatcher] .> IFileSysRepo: required\n interface
+[FileWatcher] --> PT: use
+[FileSysRepo] -> F: use
+@enduml
